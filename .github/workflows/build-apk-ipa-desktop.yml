@@ -35,6 +35,10 @@ jobs:
       with:
         python-version: ${{ env.PYTHON_VERSION }}
 
+    - name: Install dependencies
+      run: |
+        apt install libgtk-3-dev ninja-build
+
     - name: Install Python Dependencies
       run: |
         python -m pip install --upgrade pip
@@ -50,18 +54,6 @@ jobs:
       with:
         distribution: 'temurin'
         java-version: '21'
-
-    - name: Install Android SDK
-      run: |
-        sudo apt-get install -y wget unzip
-        mkdir -p $ANDROID_HOME/cmdline-tools
-        wget https://dl.google.com/android/repository/commandlinetools-linux-8512546_latest.zip -O cmdline-tools.zip
-        unzip cmdline-tools.zip -d $ANDROID_HOME/cmdline-tools
-        rm cmdline-tools.zip
-        mv $ANDROID_HOME/cmdline-tools/cmdline-tools/* $ANDROID_HOME/cmdline-tools/
-        rmdir $ANDROID_HOME/cmdline-tools/cmdline-tools
-        yes | $ANDROID_HOME/cmdline-tools/bin/sdkmanager --licenses
-        $ANDROID_HOME/cmdline-tools/bin/sdkmanager "platform-tools" "platforms;android-33"
 
     - name: Flet Build APK
       run: |

@@ -1,19 +1,19 @@
-import flet as fp
+from flet import *
 
 
-def main(page: fp.Page):
-    page.theme_mode = fp.ThemeMode.LIGHT
-    page.appbar = fp.AppBar(
-        title=fp.Text("hello youtube", color="white"), bgcolor="blue"
+def main(page: Page):
+    page.theme_mode = ThemeMode.LIGHT
+    page.appbar = AppBar(
+        title=Text("hello youtube", color="white"), bgcolor="blue"
     )
     page.add(
-        fp.Column(
+        Column(
             [
-                fp.Text("hello"),
-                fp.ElevatedButton("test123", bgcolor="blue", color="white"),
+                Text("hello"),
+                ElevatedButton("test123", bgcolor="blue", color="white"),
             ]
         )
     )
 
 
-fp.app(main)
+app(main)
