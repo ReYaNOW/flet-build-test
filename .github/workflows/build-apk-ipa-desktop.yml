@@ -51,6 +51,18 @@ jobs:
         distribution: 'temurin' # See https://github.com/marketplace/actions/setup-java-jdk#supported-distributions for available options
         java-version: '21'
 
+    - name: Install Android SDK
+      run: |
+        sudo apt-get install -y wget unzip
+        mkdir -p $ANDROID_HOME/cmdline-tools
+        wget https://dl.google.com/android/repository/commandlinetools-linux-8512546_latest.zip -O cmdline-tools.zip
+        unzip cmdline-tools.zip -d $ANDROID_HOME/cmdline-tools
+        rm cmdline-tools.zip
+        mv $ANDROID_HOME/cmdline-tools/cmdline-tools/* $ANDROID_HOME/cmdline-tools/
+        rmdir $ANDROID_HOME/cmdline-tools/cmdline-tools
+        yes | $ANDROID_HOME/cmdline-tools/bin/sdkmanager --licenses
+        $ANDROID_HOME/cmdline-tools/bin/sdkmanager "platform-tools" "platforms;android-33"
+
     - name: Flet Build APK
       run: |
         flutter config --no-analytics # disable flutter analytics
