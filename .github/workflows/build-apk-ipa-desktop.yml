@@ -37,7 +37,7 @@ jobs:
 
     - name: Install dependencies
       run: |
-        apt install libgtk-3-dev ninja-build
+        sudo apt install libgtk-3-dev ninja-build
 
     - name: Install Python Dependencies
       run: |
