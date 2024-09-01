@@ -54,21 +54,20 @@ jobs:
       run: |
         mkdir -p $ANDROID_SDK_ROOT/cmdline-tools
         wget https://dl.google.com/android/repository/commandlinetools-linux-8512546_latest.zip
-        unzip commandlinetools-linux-8512546_latest.zip -d $ANDROID_SDK_ROOT/cmdline-tools
+        unzip -d $ANDROID_SDK_ROOT/cmdline-tools commandlinetools-linux-8512546_latest.zip
         rm commandlinetools-linux-8512546_latest.zip
 
-    - name: Verify sdkmanager Installation
+    - name: Verify Command-Line Tools Installation
       run: |
         echo "Listing sdkmanager directory:"
         ls -l $ANDROID_SDK_ROOT/cmdline-tools
         echo "Listing bin directory:"
-        ls -l $ANDROID_SDK_ROOT/cmdline-tools/latest/bin
+        ls -l $ANDROID_SDK_ROOT/cmdline-tools/cmdline-tools/bin
 
     - name: Update PATH
       run: |
         echo "Updating PATH"
-        echo "$ANDROID_SDK_ROOT/cmdline-tools/latest/bin" >> $GITHUB_ENV
-        echo "PATH is now: $PATH"
+        echo "$ANDROID_SDK_ROOT/cmdline-tools/cmdline-tools/bin" >> $GITHUB_ENV
 
     - name: Verify sdkmanager Command
       run: |
