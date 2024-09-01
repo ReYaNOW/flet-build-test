@@ -57,9 +57,23 @@ jobs:
         unzip commandlinetools-linux-8512546_latest.zip -d $ANDROID_SDK_ROOT/cmdline-tools
         rm commandlinetools-linux-8512546_latest.zip
 
+    - name: Verify sdkmanager Installation
+      run: |
+        echo "Listing sdkmanager directory:"
+        ls -l $ANDROID_SDK_ROOT/cmdline-tools
+        echo "Listing bin directory:"
+        ls -l $ANDROID_SDK_ROOT/cmdline-tools/latest/bin
+
     - name: Update PATH
       run: |
+        echo "Updating PATH"
         echo "$ANDROID_SDK_ROOT/cmdline-tools/latest/bin" >> $GITHUB_ENV
+        echo "PATH is now: $PATH"
+
+    - name: Verify sdkmanager Command
+      run: |
+        echo "Checking sdkmanager version"
+        sdkmanager --version
 
     - name: Install Dependencies
       run: |
