@@ -68,6 +68,7 @@ jobs:
       run: |
         echo "Updating PATH"
         echo "$ANDROID_SDK_ROOT/cmdline-tools/cmdline-tools/bin" >> $GITHUB_ENV
+        echo "PATH=$PATH:$ANDROID_SDK_ROOT/cmdline-tools/cmdline-tools/bin" >> $GITHUB_ENV
 
     - name: Verify sdkmanager Command
       run: |
