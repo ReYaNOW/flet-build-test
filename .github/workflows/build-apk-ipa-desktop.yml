@@ -198,6 +198,16 @@ jobs:
         distribution: 'temurin'
         java-version: '21'
 
+    - name: Install Android SDK
+      run: |
+        sudo apt-get install -y wget unzip
+        mkdir -p $ANDROID_HOME
+        wget https://dl.google.com/android/repository/commandlinetools-linux-8512546_latest.zip -O cmdline-tools.zip
+        unzip cmdline-tools.zip -d $ANDROID_HOME
+        rm cmdline-tools.zip
+        yes | $ANDROID_HOME/cmdline-tools/bin/sdkmanager --licenses
+        $ANDROID_HOME/cmdline-tools/bin/sdkmanager "platform-tools" "platforms;android-33"
+
     - name: Flet Build APK
       run: |
         flutter config --no-analytics
