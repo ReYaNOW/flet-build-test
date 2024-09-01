@@ -60,7 +60,6 @@ jobs:
       env:
         JAVA_HOME: /usr/lib/jvm/temurin-21-jdk
       run: |
-        echo -e "\nandroid {\n    packagingOptions {\n        doNotStrip '**/libpythonbundle.so'\n    }\n}" >> android/app/build.gradle
         flutter config --no-analytics # disable flutter analytics
         flet build apk --verbose    # adapt the command to your needs - https://flet.dev/docs/publish 
 
