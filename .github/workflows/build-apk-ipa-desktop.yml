@@ -53,20 +53,24 @@ jobs:
     - name: Install Command-Line Tools
       run: |
         mkdir -p $ANDROID_SDK_ROOT/cmdline-tools
-        wget https://dl.google.com/android/repository/commandlinetools-linux-8512546_latest.zip
-        unzip -d $ANDROID_SDK_ROOT/cmdline-tools commandlinetools-linux-8512546_latest.zip
-        rm commandlinetools-linux-8512546_latest.zip
+        wget https://dl.google.com/android/repository/commandlinetools-linux-8512546_latest.zip -O cmdline-tools.zip
+        unzip cmdline-tools.zip -d $ANDROID_SDK_ROOT/cmdline-tools
+        rm cmdline-tools.zip
+        mv $ANDROID_SDK_ROOT/cmdline-tools/cmdline-tools/* $ANDROID_SDK_ROOT/cmdline-tools/
+        rmdir $ANDROID_SDK_ROOT/cmdline-tools/cmdline-tools
 
     - name: Verify Command-Line Tools Installation
       run: |
         echo "Listing sdkmanager directory:"
         ls -l $ANDROID_SDK_ROOT/cmdline-tools
         echo "Listing bin directory:"
-        ls -l $ANDROID_SDK_ROOT/cmdline-tools/cmdline-tools/bin
+        ls -l $ANDROID_SDK_ROOT/cmdline-tools/bin
+        echo "Checking sdkmanager version:"
+        $ANDROID_SDK_ROOT/cmdline-tools/bin/sdkmanager --version
 
     - name: Install Dependencies
       run: |
-        export PATH="$ANDROID_SDK_ROOT/cmdline-tools/cmdline-tools/bin:$PATH"
+        export PATH="$ANDROID_SDK_ROOT/cmdline-tools/bin:$PATH"
         echo "Updated PATH: $PATH"
         sudo apt update
         sudo apt install -y ninja-build libgtk-3-dev
