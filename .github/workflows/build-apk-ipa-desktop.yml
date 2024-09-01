@@ -57,8 +57,6 @@ jobs:
         sudo apt install ninja-build libgtk-3-dev
 
     - name: Flet Build APK
-      env:
-        JAVA_HOME: /usr/lib/jvm/temurin-21-jdk
       run: |
         flutter config --no-analytics # disable flutter analytics
         flet build apk --verbose    # adapt the command to your needs - https://flet.dev/docs/publish 
