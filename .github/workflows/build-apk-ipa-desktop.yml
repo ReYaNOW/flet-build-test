@@ -58,15 +58,9 @@ jobs:
         rm cmdline-tools.zip
         mv $ANDROID_SDK_ROOT/cmdline-tools/cmdline-tools/* $ANDROID_SDK_ROOT/cmdline-tools/
         rmdir $ANDROID_SDK_ROOT/cmdline-tools/cmdline-tools
-
-    - name: Verify Command-Line Tools Installation
-      run: |
-        echo "Listing sdkmanager directory:"
+        echo "Updated PATH: $PATH"
         ls -l $ANDROID_SDK_ROOT/cmdline-tools
-        echo "Listing bin directory:"
         ls -l $ANDROID_SDK_ROOT/cmdline-tools/bin
-        echo "Checking sdkmanager version:"
-        $ANDROID_SDK_ROOT/cmdline-tools/bin/sdkmanager --version || echo "sdkmanager not found or not working"
 
     - name: Install SDK and NDK Packages
       run: |
@@ -80,7 +74,7 @@ jobs:
     - name: Build APK
       run: |
         flutter config --no-analytics
-        flet build apk --verbose
+        flutter build apk --verbose
 
     - name: Upload APK Artifact
       uses: actions/upload-artifact@v4.3.4
